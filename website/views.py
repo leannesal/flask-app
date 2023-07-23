@@ -1,8 +1,8 @@
-from flask import Blueprint 
+from flask import Blueprint,render_template
 
 #define the file as blueprint of the application 
 views = Blueprint('views',__name__)
 
-@views.route('/'):
+@views.route('/login')
 def home():
-    return 'Hi'
+    return render_template("login.html")
