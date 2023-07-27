@@ -10,8 +10,8 @@ from website.views import views
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__)
 
-#secure session data
-app.config['SECRET_KEY'] = 'mysecret'
+#secure session data: encrypt the session data and cookies related to our website
+app.config['SECRET_KEY'] = 'Cisco123!'
 
 
 #register views
@@ -27,6 +27,6 @@ db = SQLAlchemy(app)
 
 
 
-
+#only if we run this file, will the app run
 if __name__=='__main__':
     app.run(debug=True)
