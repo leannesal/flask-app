@@ -2,32 +2,25 @@
 
 {% block content %}
     <h1 class="title">{% block title %} Registration {% endblock %}</h1>
-    <div class="auth-row">
-        <form method="post">
+    <form>
+        <div class="container">
             <p>
-                <label for="name">Username</label>
-                <input type="text" name="name"
-                required class='form-control'>
-                </input>
-            </p>
-
-            <p>
-                <label for="email">Email</label>
-                <input type="email" name="email"
-                required class='form-control'>
-                </input>
-            </p>
             
+                <form method="post">
+                    <label for="name">Username</label>
+                    <input type="text" name="name" class='form-control' id='username'></input>
+            </p>
+            <p>
+  
+                <label for="email">Email</label>
+                <input type="email" name="email" class='form-control' id='email'></input>
+
+            </p>
             <p>
                 <label for="password">Password</label>
-                <input type="password" name="pass"
-                required class='form-control'>
-                </input>
+                <input type="password" name="pass" class='form-control' id='password'></input>
             </p>
-
-            <p>
-                <button type="submit">Submit</button>
-            </p>
-        
-    </div>
+            <button type="submit">Submit</button>
+        </div>
+    </form>
 {% endblock %}

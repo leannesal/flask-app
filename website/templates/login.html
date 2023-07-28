@@ -6,27 +6,28 @@
     
     <h1>Login</h1>
 
-    <div class="auth-row">
         <form method="post">
-            <p>
-                <label for="email">Email</label>
-                <input type="email" name="email"
-                required class='form-control'>
-                </input>
-            </p>
-            <p>
-                <label for="password">Password</label>
-                <input type="password" name="pass"
-                required class='form-control'>
-                </input>
-            </p>
+            <div class="container">
+                <p>
+                
+                    <form method="post">
+                        <label for="name">Username</label>
+                        <input type="text" name="name" class='form-control' id='username'></input>
+                </p>
+                <p>
+    
+                    <label for="email">Email</label>
+                    <input type="email" name="email" class='form-control' id='email'></input>
+    
+                </p>
 
-            <p>
-                <button type="submit">Submit</button>
-            </p>
+                <p>
+                    <button type="submit">Submit</button>
+                </p>
+            </div>
         </form>
         
-    </div>
+
     
     <p>
         <a class="admin" href="create_admin">Create an admin account</a>
