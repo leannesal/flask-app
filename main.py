@@ -1,6 +1,3 @@
-import os
-from flask import Flask, request
-from flask_sqlalchemy import SQLAlchemy
 import sqlite3 as sql
 from website import create_app
 
