@@ -29,13 +29,11 @@ def registration():
             flash('Password must be at least 7 characters.', category='error')
         else:
         '''
-        print("here again")
-        user = User(username=username, email=email, password=generate_password_hash(password, method='sha256'))
-        db.session.add(user)
+        registered_user = User(username=username, email=email, password=generate_password_hash(password, method='sha256'))
+        db.session.add(registered_user)
         db.session.commit()
-        login_user(new_user, remember=True)
+        login_user(registered_user, remember=True)
         flash('Account has been created', category='success')
-        flash('Account has been created succesfully', category='success')
         return render_template('home.html')   
     return render_template('registration.html')
 
