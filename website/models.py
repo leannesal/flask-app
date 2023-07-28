@@ -1,5 +1,13 @@
 from website import db
+import flask
 from flask_login import UserMixin
+
+#model for users
+class User(db.Model, UserMixin):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(70))
+    email = db.Column(db.String(70), unique=True)
+    password = db.Column(db.String(70))
 
 #model for contract employee table
 class Contract_employees(db.Model, UserMixin):
@@ -19,3 +27,4 @@ class Non_contract_employees(db.Model, UserMixin):
     email = db.Column(db.String(80), unique=True, nullable=False)
     contact = db.Column(db.Text)
     role = db.Column(db.Text, nullable=False)
+

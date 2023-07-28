@@ -1,14 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1 class="title">{% block title %} Registration {% endblock %}</h1>
-    <form>
+    <form method="POST">
         <div class="container">
             <p>
-            
-                <form method="post">
-                    <label for="username">Username</label>
-                    <input type="text" name="username" class='form-control' id='username'></input>
+                <label for="username">Username</label>
+                <input type="text" name="username" class='form-control' id='username'></input>
             </p>
             <p>
   
@@ -27,7 +24,7 @@
                 <label for="password1">Password</label>
                 <input type="password" name="password" class='form-control' id='password' placeholder="Confirm password"></input>
             </p>
-            <button type="submit">Submit</button>
+            <input type="submit" class="btn btn-primary" value="Submit"/>
         </div>
     </form>
 {% endblock %}
