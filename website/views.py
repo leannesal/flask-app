@@ -53,5 +53,40 @@ def new_no_contract_employee():
         db.session.add(employee)
         db.session.commit()
         flash('No contract employee has been added')
-        return redirect(url_for("home"))
-    return render_template("new_no_contract_employee.html")
+        return redirect(url_for("views.home"))
+    return render_template("new_no_contract_employee.html", new_user=current_user)
+
+@views.route("/edit_employee/<string:id>",methods=['POST','GET'])
+def edit_employee(id):
+    employee=Contract_employees.query.get_or_404(id)
+    if request.method=='POST':
+        employee.firstname=request.form.get('Firstname')
+        employee.lastname=request.form.get('Lastname')
+        employee.email=request.form.get('Email')
+        employee.address=request.form.get('Address')
+        employee.joined=request.form.get('Joined')
+        employee.role=request.form.get('Role')
+        db.session.add(employee)
+        db.session.commit()
+        flash('Employee has been updated')
+        return redirect(url_for("views.home"))
+    return render_template("edit_employee.html",employees_info=employee, new_user=current_user)
+
+#Delete a contract emoployee   
+@views.route("/delete_employee/<int:id>",methods=['GET','POST'])
+def delete_employee(id):
+        employee=Contract_employees.query.get_or_404(id)
+        db.session.delete(employee)
+        db.session.commit()
+        flash('Employee Deleted')
+        return redirect(url_for("views.home", new_user=current_user))
+    
+
+#Delete a non-contract emoployee 
+@views.route("/delete_no_contract_employee/<int:id>",methods=['GET','POST'])
+def delete_no_contract_employee(id):
+    employee=Non_contract_employees.query.get(id)
+    db.session.delete(employee)
+    db.session.commit()
+    flash('Non contract employee Deleted')
+    return redirect(url_for("views.home", new_user=current_user))

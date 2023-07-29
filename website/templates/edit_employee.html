@@ -3,7 +3,7 @@
 {% block content %}
     <div class='row'>
         <h3>Edit employee information</h3><hr>
-        <form method='post' action='{{url_for("edit_employee",id=employees_info.id)}}'>
+        <form method='post' action='{{url_for("views.edit_employee",id=employees_info.id)}}'>
             <p>
                 <label for="Firstname">Firstname</label>
                 <input type="text" name="Firstname" required class='form-control' value='{{employees_info.Firstname}}'>
