@@ -7,79 +7,67 @@
 
 <p class='adding_button'><a href='{{url_for("views.new_contract_employee")}}' >Add employee</a></p>
 
-<div class="content">
-    <table>
-        <thead>
-            <th>Id</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Address</th>
-            <th>Joined</th>
-            <th>Role</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
-        <tbody>
-            {% for employee in employees_info %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{employee.firstname}}</td>
-                <td>{{employee.lastname}}</td>
-                <td>{{employee.email}}</td>
-                <td>{{employee.address}}</td>
-                <td>{{employee.joined}}</td>
-                <td>{{employee.role}}</td>
-                <td><a href='{{url_for("views.edit_employee",id=employee.id)}}' class='btn-edit'>Edit</a></td>
-                <td><a href='{{url_for("views.delete_employee",id=employee.id)}}' class='btn-delete' onclick='return confirm("Are you sure you want to delete")'>Delete</a></td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</div>
+<table class="table table-striped">
+    <thead> 
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Firstname</th>
+            <th scope="col">Lastname</th>
+            <th scope="col">Email</th>
+            <th scope="col">Address</th>
+            <th scope="col">Joined</th>
+            <th scope="col">Role</th>
+            <th scope="col">Edit</th>
+            <th scope="col">Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for employee in employees_info %}
+        <tr>
+            <th score="row">{{loop.index}}</th>
+            <td>{{employee.firstname}}</td>
+            <td>{{employee.lastname}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.address}}</td>
+            <td>{{employee.joined}}</td>
+            <td>{{employee.role}}</td>
+            <td><a href='{{url_for("views.edit_employee",id=employee.id)}}' class='btn-edit'>Edit</a></td>
+            <td><a href='{{url_for("views.delete_employee",id=employee.id)}}' class='btn-delete' onclick='return confirm("Are you sure you want to delete")'>Delete</a></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>
         
 <p class='adding_button'><a href='{{url_for("views.new_no_contract_employee")}}'>Add non-contract employee</a></p>
 
-<div class="content">
-    <table>
-        <thead>
-            <th>Id</th>
-            <th>Firstname</th>
-            <th>Lastname</th>
-            <th>Email</th>
-            <th>Contact</th>
-            <th>Role</th>
-            <th>Edit</th>
-            <th>Delete</th>
-        </thead>
-        <tbody>
-            {% for employee in no_contract_info %}
-            <tr>
-                <td>{{loop.index}}</td>
-                <td>{{employee.firstname}}</td>
-                <td>{{employee.lastname}}</td>
-                <td>{{employee.email}}</td>
-                <td>{{employee.contact}}</td>
-                <td>{{employee.role}}</td>
-                <td><a href='{{url_for("views.edit_no_contract_employee",id=employee.id)}}' class='btn-edit'>Edit</a></td>
-                <td><a href='{{url_for("views.delete_no_contract_employee",id=employee.id)}}' class='btn-delete' onclick='return confirm("Are you sure you want to delete")'>Delete</a></td>
-            </tr>
-            {%endfor%}
-        </tbody>
-    </table>
-</div>
+<table class="table table-striped"> 
+    <thead>
+        <th>#</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Role</th>
+        <th>Edit</th>
+        <th>Delete</th>
+    </thead>
+    <tbody>
+        {% for employee in no_contract_info %}
+        <tr>
+            <th scope="row">{{loop.index}}</th>
+            <td>{{employee.firstname}}</td>
+            <td>{{employee.lastname}}</td>
+            <td>{{employee.email}}</td>
+            <td>{{employee.contact}}</td>
+            <td>{{employee.role}}</td>
+            <td><a href='{{url_for("views.edit_no_contract_employee",id=employee.id)}}' class='btn-edit'>Edit</a></td>
+            <td><a href='{{url_for("views.delete_no_contract_employee",id=employee.id)}}' class='btn-delete' onclick='return confirm("Are you sure you want to delete")'>Delete</a></td>
+        </tr>
+        {%endfor%}
+    </tbody>
+</table>       
 
-<div class="message">
-    {% with messages = get_flashed_messages() %}
-        {% if messages %}
-            <ul class="flashes">
-                {% for message in messages %}
-                    <div class="message_flash">{{ message }}</div>
-                {% endfor %}
-            </ul>
-        {% endif %}
-    {% endwith %}
-</div>
+
 
 
 
