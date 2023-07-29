@@ -15,7 +15,7 @@ def login():
         #authenticating user:
         user=User.query.filter_by(email=email).first()
         if user:
-            if check_password_hash(user.passowrd, password):
+            if check_password_hash(user.password, password):
                 flash('You\'ve loggged in successfully', category='success')
             else: 
                 flash('The credentials entered are incorrect. Please try again', category='error')
