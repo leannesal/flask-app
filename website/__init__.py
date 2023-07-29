@@ -21,11 +21,13 @@ def create_app():
     from .views import views
     from .models import Contract_employees, Non_contract_employees, User
     from .authentication import auth
+    
     create_database(app)
 
     login_manager = LoginManager()
     login_manager.init_app(app)
-    login_manager.login_view = 'login'
+    login_manager.login_view = 'authenitcation.login'
+
     @login_manager.user_loader
     def load_user(id):
         return User.query.get(int(id))

@@ -2,7 +2,7 @@ from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.security import generate_password_hash, check_password_hash
 from .models import User
 from . import db
-from flask_login import login_user
+from flask_login import login_required, login_user, current_user, logout_user
 
 auth=Blueprint ('authentication',__name__)
 
@@ -13,16 +13,18 @@ def login():
         password=request.form.get('password')
 
         #authenticating user:
-        user=User.query.filter_by(email=email).first()
-        if user:
-            if check_password_hash(user.password, password):
+        new_user=User.query.filter_by(email=email).first()
+        if new_user:
+            if check_password_hash(new_user.password, password):
                 flash('You\'ve loggged in successfully', category='success')
+                login_user(new_user, remember=True)
+                return redirect(url_for('views.home'))
             else: 
                 flash('The credentials entered are incorrect. Please try again', category='error')
         else:
             flash('The credentials entered are incorrect. Please try again', category='error')
 
-    return render_template("login.html")
+    return render_template("login.html", new_user=current_user)
 
 @auth.route('/registration', methods=['GET', 'POST'])
 def registration():
@@ -53,8 +55,8 @@ def registration():
             login_user(registered_user, remember=True)
             flash('Account has been created', category='success')
             return render_template('home.html')   
-    return render_template('registration.html')
+    return render_template('registration.html', new_user=current_user)
 
 @auth.route('/logout')
 def logout():
-    return 'logout'
+    return redirect(url_for("authentication.login"))
