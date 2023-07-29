@@ -19,8 +19,8 @@ def create_app():
     db.init_app(app)
 
     from .views import views
-    from .authentication import auth
     from .models import Contract_employees, Non_contract_employees, User
+    from .authentication import auth
     create_database(app)
 
     login_manager = LoginManager()
