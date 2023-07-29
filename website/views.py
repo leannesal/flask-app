@@ -72,6 +72,38 @@ def edit_employee(id):
         return redirect(url_for("views.home"))
     return render_template("edit_employee.html",employees_info=employee, new_user=current_user)
 
+#Edit contract employee
+@views.route("/edit_employee/<string:id>",methods=['POST','GET'])
+def edit_employee(id):
+    employee=Contract_employees.query.get_or_404(id)
+    if request.method=='POST':
+        employee.firstname=request.form.get('Firstname')
+        employee.lastname=request.form.get('Lastname')
+        employee.email=request.form.get('Email')
+        employee.address=request.form.get('Address')
+        employee.joined=request.form.get('Joined')
+        employee.role=request.form.get('Role')
+        db.session.add(employee)
+        db.session.commit()
+        flash('Employee has been updated')
+        return redirect(url_for("views.home"))
+    return render_template("edit_employee.html",employees_info=employee, new_user=current_user)
+
+#Edit non-contract employee
+@views.route("/edit_no_contract_employee/<string:id>",methods=['POST','GET'])
+def edit_no_contract_employee(id):
+    employee=Non_contract_employees.query.get_or_404(id)
+    if request.method=='POST':
+        employee.firstname=request.form.get('Firstname')
+        employee.lastname=request.form.get('Lastname')
+        employee.email=request.form.get('Email')
+        employee.contact=request.form.get('Contact')
+        employee.role=request.form.get('Role')
+        db.session.commit()
+        flash('No contract employee has been updated')
+        return redirect(url_for("views.home"))
+    return render_template("edit_no_contract_employee.html",no_contract_info=employee, new_user=current_user)
+
 #Delete a contract emoployee   
 @views.route("/delete_employee/<int:id>",methods=['GET','POST'])
 def delete_employee(id):
