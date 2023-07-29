@@ -8,6 +8,20 @@ auth=Blueprint ('authentication',__name__)
 
 @auth.route('/login', methods=['GET','POST'])
 def login():
+    if request.method == 'POST':
+        email=request.form.get('email')
+        password=request.form.get('password')
+
+        #authenticating user:
+        user=User.query.filter_by(email=email).first()
+        if user:
+            if check_password_hash(user.passowrd, password):
+                flash('You\'ve loggged in successfully', category='success')
+            else: 
+                flash('The credentials entered are incorrect. Please try again', category='error')
+        else:
+            flash('The credentials entered are incorrect. Please try again', category='error')
+
     return render_template("login.html")
 
 @auth.route('/registration', methods=['GET', 'POST'])
@@ -18,23 +32,27 @@ def registration():
         email = request.form.get('email')
         password= request.form.get('password')
         password1=request.form.get('password1')
-        '''
-        if len(username) < 4:
-            flash('Email must be greater than 3 characters.', category='error')
-        elif len(email) < 2:
-            flash('First name must be greater than 1 character.', category='error')
+
+        #check if user already exists
+        new_user=User.query.filter_by(email=email).first()
+        if new_user:
+            flash('the Email you entered already exists. Please try to login', category='error')
+        #check entries match requirements: 
+        elif len(username) <=6:
+            flash('Username must be greater than 6 characters', category='error')
+        elif len(email) <=10:
+            flash('Email must be greater than 10 character', category='error')
+        elif len(password) <=8:
+            flash('Password must be at least 9 characters', category='error')
         elif password != password1:
-            flash('Passwords do not match.', category='error')
-        elif len(password) < 7:
-            flash('Password must be at least 7 characters.', category='error')
+            flash('Passwords do not match', category='error')
         else:
-        '''
-        registered_user = User(username=username, email=email, password=generate_password_hash(password, method='sha256'))
-        db.session.add(registered_user)
-        db.session.commit()
-        login_user(registered_user, remember=True)
-        flash('Account has been created', category='success')
-        return render_template('home.html')   
+            registered_user = User(username=username, email=email, password=generate_password_hash(password, method='sha256'))
+            db.session.add(registered_user)
+            db.session.commit()
+            login_user(registered_user, remember=True)
+            flash('Account has been created', category='success')
+            return render_template('home.html')   
     return render_template('registration.html')
 
 @auth.route('/logout')
