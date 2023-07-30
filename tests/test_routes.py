@@ -32,8 +32,8 @@ def test_resgistration_route():
 
 
 
-def test_register_user(client):
-    response = client.post("/registration", data={
+def test_register_user():
+    response = app.test_client().post("/registration", data={
         "username": "root",
         "email": "lsalame@123.com",
         "password":"passwordP123",
@@ -46,8 +46,8 @@ def test_register_user(client):
     except:
         print(response.status_code)
 
-def test_login_user(client):
-    response = client.post("/login", data={
+def test_login_user():
+    response = app.test_client().post("/login", data={
         "email": "lsalame@123.com",
         "password":"passwordP1234"
     })
@@ -57,6 +57,7 @@ def test_login_user(client):
         print("test passed")
     except:
         print(response.status_code)
+
 
 
 

@@ -8,4 +8,4 @@ def test_auth_no_user(app_db):
             "password": "pass"
         }
     )
-    assert response.status_code == 404
+    assert response.status_code == 401
