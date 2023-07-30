@@ -33,14 +33,13 @@ def app_db(flask_app):
 def db_data(app_db):
 
     user = User()
-    user.username = "sergio"
-    user.email = "sergio@mail.com"
-    user.password = generate_password_hash("pass")
+    user.email = "lsalame@cisco.com"
+    user.password = generate_password_hash("password")
     db.session.add(user)
 
     db.session.commit()
 
     yield app_db
 
-    db.session.execute(delete(user))
+    db.session.execute(delete(User))
     db.session.commit()

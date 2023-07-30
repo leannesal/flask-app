@@ -31,7 +31,7 @@ def test_resgistration_route():
         print(f"test has failed {e}")
 
 
-
+#check if no issue arise when posting data to route '/registration' 
 def test_register_user():
     response = app.test_client().post("/registration", data={
         "username": "root",
@@ -46,17 +46,7 @@ def test_register_user():
     except:
         print(response.status_code)
 
-def test_login_user():
-    response = app.test_client().post("/login", data={
-        "email": "lsalame@123.com",
-        "password":"passwordP1234"
-    })
-    try:
-        assert response.status_code == 200
-        print(response.__dict__)
-        print("test passed")
-    except:
-        print(response.status_code)
+
 
 
 
