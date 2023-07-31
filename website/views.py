@@ -2,8 +2,10 @@
 
 from flask import Blueprint,render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
-from .models import Contract_employees, Non_contract_employees
+from .models import Contract_employees, Non_contract_employees, User
 from website import db
+from sqlalchemy import func, select
+import json
 
 #define the file as blueprint of the application 
 views = Blueprint('views',__name__)
@@ -13,10 +15,11 @@ views = Blueprint('views',__name__)
 def home():
     contract_employee=Contract_employees.query.all()
     non_contract_employee=Non_contract_employees.query.all()
-    return render_template("home.html", new_user=current_user,no_contract_info=non_contract_employee,employees_info=contract_employee)
+    return render_template("home.html", new_user=current_user,no_contract_info=non_contract_employee,employees_info=contract_employee),200
 
 #Add a new contract employee
 @views.route("/new_contract_employee",methods=['POST','GET'])
+@login_required
 def new_contract_employee():
     if request.method=='POST':
         firstname=request.form.get('firstname')
@@ -31,6 +34,7 @@ def new_contract_employee():
                                 address=address, 
                                 joined=joined, 
                                 role=role)
+        
         db.session.add(employee)
         db.session.commit()
         flash('Employee has been added')
@@ -38,6 +42,7 @@ def new_contract_employee():
     return render_template("new_contract_employee.html",new_user=current_user)
 
 @views.route("/new_no_contract_employee",methods=['POST','GET'])
+@login_required
 def new_no_contract_employee():
     if request.method=='POST':
         firstname=request.form['firstname']
@@ -57,6 +62,7 @@ def new_no_contract_employee():
     return render_template("new_no_contract_employee.html", new_user=current_user)
 
 @views.route("/edit_employee/<string:id>",methods=['POST','GET'])
+@login_required
 def edit_employee(id):
     employee=Contract_employees.query.get_or_404(id)
     if request.method=='POST':
@@ -74,6 +80,7 @@ def edit_employee(id):
 
 #Edit non-contract employee
 @views.route("/edit_no_contract_employee/<string:id>",methods=['POST','GET'])
+@login_required
 def edit_no_contract_employee(id):
     employee=Non_contract_employees.query.get_or_404(id)
     if request.method=='POST':
@@ -89,6 +96,7 @@ def edit_no_contract_employee(id):
 
 #Delete a contract emoployee   
 @views.route("/delete_employee/<int:id>",methods=['GET','POST'])
+@login_required
 def delete_employee(id):
         employee=Contract_employees.query.get_or_404(id)
         db.session.delete(employee)
@@ -99,9 +107,18 @@ def delete_employee(id):
 
 #Delete a non-contract emoployee 
 @views.route("/delete_no_contract_employee/<int:id>",methods=['GET','POST'])
+@login_required
 def delete_no_contract_employee(id):
     employee=Non_contract_employees.query.get(id)
     db.session.delete(employee)
     db.session.commit()
     flash('Non contract employee Deleted')
     return redirect(url_for("views.home", new_user=current_user))
+
+@views.route("/database")
+def view_data():
+    users = User.query.all()
+    list=[]
+    for user in users:
+        list.append(user.email)
+    return list
