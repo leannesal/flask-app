@@ -31,16 +31,4 @@
         <a class="admin" href="create_admin">Create an admin account</a>
     </p>
 
-    <div class="message">
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul class="flashes">
-                    {% for message in messages %}
-                        <div class="message_flash">{{ message }}</div>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-    </div>
-    
 {% endblock %}

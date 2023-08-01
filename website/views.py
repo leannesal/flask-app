@@ -115,10 +115,4 @@ def delete_no_contract_employee(id):
     flash('Non contract employee Deleted')
     return redirect(url_for("views.home", new_user=current_user))
 
-@views.route("/database")
-def view_data():
-    users = User.query.all()
-    list=[]
-    for user in users:
-        list.append(user.email)
-    return list
+

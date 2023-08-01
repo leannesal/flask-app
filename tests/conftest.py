@@ -1,9 +1,8 @@
 import pytest
 from sqlalchemy import delete
 from werkzeug.security import generate_password_hash
-
-from website import create_app, db
-from website.models import User
+from website import db, create_app
+from website.models import User, Contract_employees
 
 @pytest.fixture(scope="session")
 def flask_app():
@@ -31,6 +30,13 @@ def app_db(flask_app):
 
 @pytest.fixture
 def db_data(app_db):
+    employee=Contract_employees()
+    firstname= 'John',
+    lastname='Doe',
+    email='john@example.com',
+    address= '123 Main St',
+    joined='2023-07-31',
+    role='Software Engineer'
 
     user = User()
     user.email = "lsalame1@cisco.com"
@@ -42,4 +48,5 @@ def db_data(app_db):
     yield app_db
 
 
-    db.session.commit()
+    db.session.execute(delete(User))
+
