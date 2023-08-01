@@ -6,13 +6,9 @@ from website.models import User
 
 
 
-@pytest.fixture(scope="session")
-def app():
+@pytest.fixture()
+def flask_app():
     app = create_app("sqlite://")
-    yield app
-
-@pytest.fixture(scope="session")
-def flask_app(app):
 
     client = app.test_client()
 
@@ -24,7 +20,7 @@ def flask_app(app):
     context.pop()
 
 
-@pytest.fixture(scope="session")
+@pytest.fixture()
 def app_db(flask_app):
     db.create_all()
 
@@ -44,6 +40,46 @@ def db_data(app_db):
     db.session.commit()
 
     yield app_db
+
+
+    db.session.execute(delete(User))
+
+
+
+
+@pytest.fixture(scope="session")
+def flask_session():
+    app = create_app("sqlite://")
+
+    client = app.test_client()
+
+    context = app.test_request_context()
+    context.push()
+
+    yield client
+
+    context.pop()
+
+@pytest.fixture(scope="session")
+def db_session(flask_session):
+    db.create_all()
+
+    yield flask_session
+
+    db.session.commit()
+    db.drop_all()
+
+
+@pytest.fixture(scope="session")
+def data_session(db_session):
+    user = User()
+    user.email = "lsalame1@cisco.com"
+    user.password = generate_password_hash("Password123")
+    db.session.add(user)
+
+    db.session.commit()
+
+    yield db_session
 
 
     db.session.execute(delete(User))

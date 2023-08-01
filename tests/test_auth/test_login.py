@@ -32,7 +32,7 @@ def test_wrong_pass(db_data):
         url_for("authentication.login"),
         data={
             "email": "lsalame1@cisco.com",
-            "password": "Password123"
+            "password": "Password1234"
         }
     )
     assert response.status_code == 401
