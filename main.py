@@ -1,11 +1,10 @@
 import sqlite3 as sql
 from website import create_app
+import os
 
-app=create_app()
+basedir = os.path.abspath(os.path.dirname(__file__))
 
-
-#db = SQLAlchemy(app)
-
+app=create_app('sqlite:///' + os.path.join(basedir, 'database.db'))
 
 
 #only if we run this file, will the app run

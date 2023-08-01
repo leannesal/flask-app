@@ -7,15 +7,15 @@ from flask_login import LoginManager
 
 db=SQLAlchemy()
 DB="database.db"
-basedir = os.path.abspath(os.path.dirname(__file__))
 
-def create_app():
+
+def create_app(sql_path):
     
     app = Flask(__name__)
 
     #secure session data: encrypt the session data and cookies related to our website
     app.config['SECRET_KEY'] = 'Cisco123!'
-    app.config['SQLALCHEMY_DATABASE_URI'] ='sqlite:///' + os.path.join(basedir, 'database.db')
+    app.config['SQLALCHEMY_DATABASE_URI'] = sql_path
     db.init_app(app)
 
     from .views import views

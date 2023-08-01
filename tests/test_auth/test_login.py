@@ -1,4 +1,5 @@
 from flask import url_for
+import base64
 
 #test for logging in an unregistered user  
 def test_unauth_user(app_db):
@@ -6,7 +7,7 @@ def test_unauth_user(app_db):
         url_for("authentication.login"),
         data={
             "email": "lsalame1@cisco.com",
-            "password": "password"
+            "password": "Password123"
         }
     )
     assert response.status_code == 401
@@ -17,10 +18,13 @@ def test_auth_user(db_data):
         url_for("authentication.login"),
         data={
             "email": "lsalame1@cisco.com",
-            "password": "password"
-        }
+            "password": "Password123"
+        },follow_redirects=True
     )
-    assert response.status_code == 302
+    html = response.data.decode()
+    assert response.status_code == 200
+    assert '<h1>Login</h1>' not in html
+    assert '<h1>Home</h1>' in html
 
 #test for logging in using wrong password 
 def test_wrong_pass(db_data):
@@ -28,7 +32,7 @@ def test_wrong_pass(db_data):
         url_for("authentication.login"),
         data={
             "email": "lsalame1@cisco.com",
-            "password": "Password"
+            "password": "Password123"
         }
     )
     assert response.status_code == 401
@@ -38,8 +42,8 @@ def test_wrong_user(db_data):
     response = db_data.post(
         url_for("authentication.login"),
         data={
-            "email": "lsalame@cisco.com",
-            "password": "password"
+            "email": "lsalam@cisco.com",
+            "password": "Password123"
         }
     )
     assert response.status_code == 401
@@ -50,7 +54,7 @@ def test_no_user(db_data):
         url_for("authentication.login"),
         data={
             "email": "jon@cisco.com",
-            "password": "password"
+            "password": "password345"
         }
     )
     assert response.status_code == 401

@@ -27,3 +27,4 @@ class Non_contract_employees(db.Model, UserMixin):
     contact = db.Column(db.Text)
     role = db.Column(db.Text, nullable=False)
 
+
