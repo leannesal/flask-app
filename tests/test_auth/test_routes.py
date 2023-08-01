@@ -26,7 +26,7 @@ def test_login_route(flask_app):
     
 
     
-#check if response status for route '/registration' is 200 --> successfull  
+#check if response status for route '/registration' is 200 --> successful
 def test_resgistration_route(flask_app):
     response = flask_app.get('/registration')
     html = response.data.decode()

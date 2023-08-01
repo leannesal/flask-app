@@ -5,7 +5,7 @@ from sqlalchemy import func, select
 from main import app
 
 
-#check if user regisration is succesfull
+#check if user regisration is succesful
 def test_register_user():
     response = app.test_client().post("/registration", data={
         "email": "lsalame@123.com",

@@ -9,7 +9,6 @@ from website.models import User
 @pytest.fixture(scope="session")
 def app():
     app = create_app("sqlite://")
-
     yield app
 
 @pytest.fixture(scope="session")

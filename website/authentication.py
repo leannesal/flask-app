@@ -21,10 +21,10 @@ def login():
                 return redirect(url_for('views.home'))
             else: 
                 flash('The credentials entered are incorrect. Please try again', category='error')
-                return render_template("login.html", new_user=logout_user()), 401
+                return render_template("login.html", new_user=current_user), 401
         else:
             flash('The credentials entered are incorrect. Please try again', category='error')
-            return render_template("login.html",new_user=logout_user()), 401
+            return render_template("login.html",new_user=current_user), 401
 
 
     return render_template("login.html", new_user=current_user)
@@ -59,7 +59,7 @@ def registration():
             login_user(registered_user, remember=True)
             flash('Account has been created', category='success')
             return redirect(url_for('views.home'))   
-    return render_template('registration.html', new_user=logout_user())
+    return render_template('registration.html', new_user=current_user)
 
 
 @auth.route('/logout')
