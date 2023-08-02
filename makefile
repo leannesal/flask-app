@@ -1,4 +1,7 @@
 SRC_DIR := src
+IMAGE_REG ?= ghcr.io
+IMAGE_REPO ?= leannesal/flask-app
+IMAGE_TAG ?= latest
 
 run: 
 	python3 src/main.py
@@ -14,10 +17,15 @@ install:
 build:
 	python3 setup.py build bdist_wheel
 
+image:  #Build container image from Dockerfile 
+	docker build . --file Dockerfile \
+	--tag $(IMAGE_REG)/$(IMAGE_REPO):$(IMAGE_TAG)
+
 clean:
 	rm -rf ./build
 	rm -rf ./dist
 	rm -rf /src/flask_app.egg-info
+
 
 
 # ============================================================================
