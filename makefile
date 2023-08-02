@@ -1,3 +1,5 @@
+SRC_DIR := project
+
 run: 
 	python3 project/src/main.py
 
