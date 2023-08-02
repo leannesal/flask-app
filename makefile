@@ -1,6 +1,9 @@
 run: 
 	python3 project/src/main.py
 
+test:
+	python3 -m pytest
+
 install: 
 	pip install -r requirements.txt
 
@@ -11,3 +14,4 @@ clean:
 	rm -rf ./build
 	rm -rf ./dist
 	rm -rf project/flask_app.egg-info
+

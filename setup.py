@@ -6,8 +6,8 @@ with open("project/README.md", "r") as f:
 setup(
     name="flask-app",
     version="1.0",
-    packages=find_packages(where="project"),
-    package_dir={"": "project"},
+    packages=find_packages(where="project/src"),
+    package_dir={"": "project/src"},
     long_description=description,
     long_description_content_type="text/markdown",
     url="https://github.com/leannesal/flask-app",
