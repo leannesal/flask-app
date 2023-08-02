@@ -1,13 +1,13 @@
 from setuptools import setup, find_packages
 
-with open("app/README.md", "r") as f:
+with open("project/README.md", "r") as f:
     description = f.read()
 
 setup(
     name="flask-app",
     version="1.0",
-    packages=find_packages(where="app"),
-    package_dir={"": "app"},
+    packages=find_packages(where="project"),
+    package_dir={"": "project"},
     long_description=description,
     long_description_content_type="text/markdown",
     url="https://github.com/leannesal/flask-app",
@@ -16,7 +16,7 @@ setup(
     install_requires=[
     'blinker==1.6.2',
     'certifi==2023.7.22',
-    'charset-normalizer==3.2.0',
+    'charset-normalizer>=3.2.0',
     'click==8.1.6',
     'exceptiongroup==1.1.2',
     'Flask==2.3.2',
@@ -43,5 +43,5 @@ setup(
     extras_require={
         "dev": ["pytest>=7.0"]
     },
-     python_requires=">=3.10",
+     python_requires=">=3.9.0",
 )
