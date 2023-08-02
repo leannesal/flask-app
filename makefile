@@ -13,5 +13,5 @@ build:
 clean:
 	rm -rf ./build
 	rm -rf ./dist
-	rm -rf project/flask_app.egg-info
+	rm -rf project/src/flask_app.egg-info
 
