@@ -1,4 +1,4 @@
-from src.main import app
+from main import app
 from flask import url_for
 import pytest
 from website.models import User
