@@ -1,7 +1,5 @@
-SRC_DIR := project
-
 run: 
-	python3 project/src/main.py
+	python3 src/main.py
 
 test:
 	python3 -m pytest
@@ -15,5 +13,5 @@ build:
 clean:
 	rm -rf ./build
 	rm -rf ./dist
-	rm -rf project/src/flask_app.egg-info
+	rm -rf /src/flask_app.egg-info
 
