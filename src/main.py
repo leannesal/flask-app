@@ -9,4 +9,4 @@ app=create_app('sqlite:///' + os.path.join(basedir, 'database.db'))
 
 #only if we run this file, will the app run
 if __name__=='__main__':
-    app.run()
+    app.run(host='0.0.0.0', port=5000)

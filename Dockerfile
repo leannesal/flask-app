@@ -1,6 +1,6 @@
-FROM python:3.9-slim-buster
+FROM python:3.8.5-slim
 
-LABEL Name="Python Flask App" Version=1.4.2
+LABEL Name="Python Flask App" 
 
 ARG srcDir=src
 WORKDIR /app
