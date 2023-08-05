@@ -4,7 +4,7 @@ from flask import Blueprint,render_template, request, flash, redirect, url_for
 from flask_login import login_required, current_user
 from website.models import Contract_employees, Non_contract_employees, User
 from website import db
-from sqlalchemy import func, select
+
 
 
 #define the file as blueprint of the application 
@@ -15,7 +15,7 @@ views = Blueprint('views',__name__)
 def home():
     contract_employee=Contract_employees.query.all()
     non_contract_employee=Non_contract_employees.query.all()
-    return render_template("home.html", new_user=current_user,no_contract_info=non_contract_employee,employees_info=contract_employee),200
+    return render_template("home.html", new_user=current_user,no_contract_info=non_contract_employee,employees_info=contract_employee, priv=current_user.priv),200
 
 #Add a new contract employee
 @views.route("/new_contract_employee",methods=['POST','GET'])

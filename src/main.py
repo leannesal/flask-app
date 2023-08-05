@@ -7,6 +7,5 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 app=create_app('sqlite:///' + os.path.join(basedir, 'database.db'))
 
 
-#only if we run this file, will the app run
 if __name__=='__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True, host='0.0.0.0', port=5000)

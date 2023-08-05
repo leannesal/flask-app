@@ -20,7 +20,9 @@
                 <th scope="col">Joined</th>
                 <th scope="col">Role</th>
                 <th scope="col">Edit</th>
+                {% if priv=="0"%}
                 <th scope="col">Delete</th>
+                {% endif %}
             </tr>
         </thead>
         <tbody>
@@ -34,7 +36,9 @@
                 <td>{{employee.joined}}</td>
                 <td>{{employee.role}}</td>
                 <td><a href='{{url_for("views.edit_employee",id=employee.id)}}' class='btn-edit'>Edit</a></td>
+                {% if priv=="0"%}
                 <td><a href='{{url_for("views.delete_employee",id=employee.id)}}' class='btn-delete' onclick='return confirm("Are you sure you want to delete")'>Delete</a></td>
+                {% endif %}
             </tr>
             {%endfor%}
         </tbody>
@@ -54,7 +58,9 @@
             <th>Contact</th>
             <th>Role</th>
             <th>Edit</th>
+            {% if priv=="0"%}
             <th>Delete</th>
+            {% endif %}
         </thead>
         <tbody>
             {% for employee in no_contract_info %}
@@ -66,7 +72,9 @@
                 <td>{{employee.contact}}</td>
                 <td>{{employee.role}}</td>
                 <td><a href='{{url_for("views.edit_no_contract_employee",id=employee.id)}}' class='btn-edit'>Edit</a></td>
+                {% if priv=="0"%}
                 <td><a href='{{url_for("views.delete_no_contract_employee",id=employee.id)}}' class='btn-delete' onclick='return confirm("Are you sure you want to delete")'>Delete</a></td>
+                {% endif %}
             </tr>
             {%endfor%}
         </tbody>

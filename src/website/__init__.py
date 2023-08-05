@@ -5,6 +5,8 @@ import os
 from os import path
 from flask_login import LoginManager
 
+
+
 db=SQLAlchemy()
 DB="database.db"
 
@@ -21,8 +23,11 @@ def create_app(sql_path):
     from .views import views
     from .models import Contract_employees, Non_contract_employees, User
     from .authentication import auth
+
     
     create_database(app)
+
+
 
     login_manager = LoginManager()
     login_manager.init_app(app)
@@ -30,7 +35,7 @@ def create_app(sql_path):
 
     @login_manager.user_loader
     def load_user(id):
-        return User.query.get(int(id))
+            return User.query.get(int(id))
     
     
 
