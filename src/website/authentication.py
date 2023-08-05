@@ -71,6 +71,7 @@ def registration():
             db.session.commit()
             login_user(registered_user, remember=True)
             flash('Account has been created', category='success')
+            flash('You\'ve loggged in successfully', category='success')
             return redirect(url_for('views.home'))   
     return render_template('registration.html', new_user=current_user)
 
