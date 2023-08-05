@@ -30,14 +30,6 @@ class Non_contract_employees(db.Model):
     role = db.Column(db.Text, nullable=False)
 
 
-'''
-class Admin(db.Model, UserMixin):
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.String(70), unique=True)
-    password = db.Column(db.String(70))
-    priv=1
-
-'''
 
     
 

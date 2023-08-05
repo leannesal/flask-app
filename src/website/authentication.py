@@ -32,7 +32,7 @@ def login():
                 return render_template("login.html", new_user=current_user), 401
 
         else:
-            flash('The email entered are incorrect. Please try again', category='error')
+            flash('The credentials entered are incorrect. Please try again', category='error')
             return render_template("login.html",new_user=current_user), 401
 
 
@@ -49,7 +49,7 @@ def registration():
         #check if user already exists
         new_user=User.query.filter_by(email=email).first()
         if new_user:
-            flash('the Email you entered already exists. Please try to login', category='error')
+            flash('The email you entered already exists. Please try to login', category='error')
         #check entries match requirements: 
         elif len(email) <=10:
             flash('Email must be greater than 10 character', category='error')

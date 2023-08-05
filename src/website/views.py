@@ -94,10 +94,15 @@ def edit_no_contract_employee(id):
         return redirect(url_for("views.home"))
     return render_template("edit_no_contract_employee.html",no_contract_info=employee, new_user=current_user)
 
+
 #Delete a contract emoployee   
 @views.route("/delete_employee/<int:id>",methods=['GET','POST'])
 @login_required
 def delete_employee(id):
+    if current_user.priv=="1":
+        flash('You are not permitted to execute this action')
+        return redirect(url_for("views.home", new_user=current_user))
+    else:
         employee=Contract_employees.query.get_or_404(id)
         db.session.delete(employee)
         db.session.commit()
@@ -109,10 +114,14 @@ def delete_employee(id):
 @views.route("/delete_no_contract_employee/<int:id>",methods=['GET','POST'])
 @login_required
 def delete_no_contract_employee(id):
-    employee=Non_contract_employees.query.get(id)
-    db.session.delete(employee)
-    db.session.commit()
-    flash('Non contract employee Deleted')
-    return redirect(url_for("views.home", new_user=current_user))
+    if current_user.priv=="1":
+        flash('You are not permitted to execute this action')
+        return redirect(url_for("views.home", new_user=current_user))
+    else:
+        employee=Non_contract_employees.query.get(id)
+        db.session.delete(employee)
+        db.session.commit()
+        flash('Non-contract employee Deleted')
+        return redirect(url_for("views.home", new_user=current_user))
 
 
