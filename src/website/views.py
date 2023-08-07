@@ -106,7 +106,7 @@ def delete_employee(id):
         employee=Contract_employees.query.get_or_404(id)
         db.session.delete(employee)
         db.session.commit()
-        flash('Employee Deleted')
+        flash('Employee deleted')
         return redirect(url_for("views.home", new_user=current_user))
     
 
@@ -121,7 +121,7 @@ def delete_no_contract_employee(id):
         employee=Non_contract_employees.query.get(id)
         db.session.delete(employee)
         db.session.commit()
-        flash('Non-contract employee Deleted')
+        flash('Non-contract employee deleted')
         return redirect(url_for("views.home", new_user=current_user))
 
 

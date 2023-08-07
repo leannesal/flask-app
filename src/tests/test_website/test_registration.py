@@ -66,8 +66,8 @@ def test_short_email(flask_app):
 def test_register_user(flask_app):
     response = flask_app.post("/registration", data={
         "email": "joe@123.com",
-        "password":"Password123",
-        "password1":"Password123"
+        "password":"Password123@",
+        "password1":"Password123@"
     }, follow_redirects=True)
     html = response.data.decode()
     assert response.status_code == 200

@@ -14,10 +14,12 @@ def login():
         email=request.form.get('email')
         password=request.form.get('password')
         #creating admin user:
+        '''
         if User.query.filter_by(priv=1).first() == None:
             admin=User(id="1",email="admin@cisco.com",password=generate_password_hash("Cisco123!", method='sha256'),priv="0")
             db.session.add(admin)
             db.session.commit()
+        '''
         new_user=User.query.filter_by(email=email).first()
         #authenticating user:
         if new_user:
